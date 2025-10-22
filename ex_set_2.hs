@@ -24,3 +24,10 @@ divides2 :: Integer -> [Integer]
 divides2 num
     | num <= 0 = []
     | otherwise = [n | n <- [1..num], isDivisor num n]
+
+isPrime :: Integer -> (Integer -> [Integer]) -> Bool
+isPrime num getDivisors
+    | num <= 0 = False
+    | otherwise = length divisors == 2 && head divisors == 1 && last divisors == num
+        where
+            divisors = getDivisors num
