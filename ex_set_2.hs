@@ -35,11 +35,19 @@ isPrime num getDivisors
 -- Exercise 3
 prefix :: String -> String -> Bool
 prefix str1 str2
-    | length str1 == 0 = False
+    | length str1 == 0 = True
     | length str1 > length str2 = False
     | otherwise = strCompare str1 str2
         where
-            strCompare s1 s2
-                | length s1 == 0 = True
-                | head s1 == head s2 = strCompare (tail s1) (tail s2)
+            strCompare [] _ = True
+            strCompare (x:xs) (y:ys)
+                | x == y = strCompare xs ys
                 | otherwise = False
+
+substring :: String -> String -> Bool
+substring str1 str2
+    | length str1 == 0 = True
+    | length str2 == 0 = False
+    | length str1 > length str2 = False
+    | prefix str1 str2 = True
+    | otherwise = substring str1 (tail str2)
