@@ -1,3 +1,5 @@
+import Data.Char
+
 -- Exercise 1
 average :: [Float] -> Float
 average [] = 0
@@ -66,3 +68,7 @@ permut (x:xs) (y:ys)
                 | otherwise = x : remove value xs
 
             removeResult = remove x (y:ys)
+
+-- Exercise 5
+capitalise :: String -> String
+capitalise str = [toUpper c | c <- str, isDigit c == False]
