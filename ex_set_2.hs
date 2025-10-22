@@ -31,3 +31,15 @@ isPrime num getDivisors
     | otherwise = length divisors == 2 && head divisors == 1 && last divisors == num
         where
             divisors = getDivisors num
+
+-- Exercise 3
+prefix :: String -> String -> Bool
+prefix str1 str2
+    | length str1 == 0 = False
+    | length str1 > length str2 = False
+    | otherwise = strCompare str1 str2
+        where
+            strCompare s1 s2
+                | length s1 == 0 = True
+                | head s1 == head s2 = strCompare (tail s1) (tail s2)
+                | otherwise = False
