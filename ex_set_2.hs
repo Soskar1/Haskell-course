@@ -45,9 +45,24 @@ prefix str1 str2
                 | otherwise = False
 
 substring :: String -> String -> Bool
+substring [] _ = True
+substring _ [] = False
 substring str1 str2
-    | length str1 == 0 = True
-    | length str2 == 0 = False
-    | length str1 > length str2 = False
     | prefix str1 str2 = True
     | otherwise = substring str1 (tail str2)
+
+-- Exercise 4
+permut :: [Integer] -> [Integer] -> Bool
+permut [] [] = True
+permut [] _ = False
+permut _ [] = False
+permut (x:xs) (y:ys)
+    | removeResult == (y:ys) = False
+    | otherwise = permut xs removeResult
+        where
+            remove _ [] = []
+            remove value (x:xs)
+                | value == x = xs
+                | otherwise = x : remove value xs
+
+            removeResult = remove x (y:ys)
