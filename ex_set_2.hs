@@ -72,3 +72,33 @@ permut (x:xs) (y:ys)
 -- Exercise 5
 capitalise :: String -> String
 capitalise str = [toUpper c | c <- str, isDigit c == False]
+
+-- Exercise 6
+type ShopItem = (String, Float)
+type ShopBasket = [ShopItem]
+
+name :: ShopItem -> String
+name (n, _) = n
+
+price :: ShopItem -> Float
+price (_, p) = p
+
+itemTotal :: ShopBasket -> ShopBasket
+itemTotal [] = []
+itemTotal basket = merge [] basket
+    where
+        getDuplicates _ [] = []
+        getDuplicates item basket = [i | i <- basket, name i == name item]
+
+        getPriceSum [] = 0
+        getPriceSum (item:basket) = price item + getPriceSum basket
+        
+        contains _ [] = False
+        contains item (itemInBasket:basket)
+            | name item == name itemInBasket = True
+            | otherwise = contains item basket
+
+        merge currentBasket (item:basket)
+            | contains item currentBasket = merge currentBasket basket
+            | length basket == 0 = item:currentBasket
+            | otherwise = merge ((name item, getPriceSum(getDuplicates item (item:basket))):currentBasket) basket
