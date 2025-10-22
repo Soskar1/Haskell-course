@@ -102,3 +102,15 @@ itemTotal basket = merge [] basket
             | contains item currentBasket = merge currentBasket basket
             | length basket == 0 = item:currentBasket
             | otherwise = merge ((name item, getPriceSum(getDuplicates item (item:basket))):currentBasket) basket
+
+itemDiscount :: String -> Integer -> ShopBasket -> ShopBasket
+itemDiscount _ _ [] = []
+itemDiscount itemName discount basket
+    | discount <= 0 = basket
+    | otherwise = reverse (applyDiscount [] basket)
+    where
+        applyDiscount b [] = b
+        applyDiscount currentBasket (item:b)
+            | itemName == name item =
+                applyDiscount ((name item, price item * (1 - fromIntegral discount / 100)):currentBasket) b
+            | otherwise = applyDiscount (item:currentBasket) b
