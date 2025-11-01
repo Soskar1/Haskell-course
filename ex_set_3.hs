@@ -53,3 +53,17 @@ overlaps (Rectangle w h pos1) (Circle r pos2) =
         (distanceX**2 + distanceY**2) <= r**2
 
 overlaps (Circle r pos1) (Rectangle w h pos2) = overlaps (Rectangle w h pos2) (Circle r pos1)
+
+-- Exercise 2
+
+any1 :: (a -> Bool) -> [a] -> Bool
+any1 cond arr = not (null (filter cond arr))
+
+any2 :: (a -> Bool) -> [a] -> Bool
+any2 cond arr = foldr (||) False (map cond arr)
+
+all1 :: (a -> Bool) -> [a] -> Bool
+all1 cond arr = length (filter cond arr) == length arr
+
+all2 :: (a -> Bool) -> [a] -> Bool
+all2 cond arr = foldr (&&) True (map cond arr)
