@@ -86,3 +86,7 @@ myLength2 arr = foldr addOne 0 arr
 -- Exercise 5
 ff :: Integer -> [Integer] -> Integer
 ff maxNum arr = (last . takeWhile (<= maxNum) . scanl1 (+) . map (*10) . filter (>0)) arr
+
+-- Exercise 6
+total :: (Integer -> Integer) -> Integer -> Integer
+total f n = (sum . map f) [0..n]
