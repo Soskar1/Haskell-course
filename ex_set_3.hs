@@ -82,3 +82,7 @@ myLength2 :: [a] -> Int
 myLength2 arr = foldr addOne 0 arr
     where
         addOne _ num = num + 1
+
+-- Exercise 5
+ff :: Integer -> [Integer] -> Integer
+ff maxNum arr = (last . takeWhile (<= maxNum) . scanl1 (+) . map (*10) . filter (>0)) arr
