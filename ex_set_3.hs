@@ -101,3 +101,10 @@ iter2 :: Integer -> (a -> a) -> (a -> a)
 iter2 n f
     | n <= 0 = id
     | otherwise = foldr (.) id (replicate (fromIntegral n) f)
+
+-- Exercise 8
+splits :: [a] -> [([a], [a])]
+splits [] = [([], [])]
+splits (x:xs) = scanl split ([], (x:xs)) (x:xs)
+    where
+        split (xs, y:ys) z = (xs ++ [z], ys)
