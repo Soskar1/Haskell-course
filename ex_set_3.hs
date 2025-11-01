@@ -68,9 +68,17 @@ all2 :: (a -> Bool) -> [a] -> Bool
 all2 cond arr = foldr (&&) True (map cond arr)
 
 -- Exercise 3
-
 unzipping :: (a, b) -> ([a], [b]) -> ([a], [b])
 unzipping (a, b) (as, bs) = (a : as, b : bs)
 
 myUnzip :: [(a, b)] -> ([a], [b])
 myUnzip arr = foldr unzipping ([], []) arr
+
+-- Exercise 4
+myLength1 :: [a] -> Int
+myLength1 arr = (sum . map (\_ -> 1)) arr
+
+myLength2 :: [a] -> Int
+myLength2 arr = foldr addOne 0 arr
+    where
+        addOne _ num = num + 1
