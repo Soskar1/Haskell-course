@@ -90,3 +90,14 @@ ff maxNum arr = (last . takeWhile (<= maxNum) . scanl1 (+) . map (*10) . filter 
 -- Exercise 6
 total :: (Integer -> Integer) -> Integer -> Integer
 total f n = (sum . map f) [0..n]
+
+-- Exercise 7
+iter1 :: Integer -> (a -> a) -> (a -> a)
+iter1 n f
+    | n <= 0 = id
+    | otherwise = f . iter1 (n - 1) f
+
+iter2 :: Integer -> (a -> a) -> (a -> a)
+iter2 n f
+    | n <= 0 = id
+    | otherwise = foldr (.) id (replicate (fromIntegral n) f)
